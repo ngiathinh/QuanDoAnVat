@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <title><%= title %> - Danh sách thực phẩm</title>
+  <link href="https://quandoanvat.onrender.com/js/app.js" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-light bg-white absolute-top">
+      <div class="container">
+        <a class="navbar-brand mx-auto" href="/">Ăn Vặt Zone</a>
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownLoai" role="button" data-bs-toggle="dropdown">
+              Loại món
+            <ul class="dropdown-menu" aria-labelledby="dropdownLoai">
+              <% if (loai) { loai.forEach(item => { %>
+                <li><a class="dropdown-item" href="/thucpham/loai/<%= item._id %>"><%= item.TenLoai %></a></li>
+              <% }) } %>
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav ms-auto">
+          <% if (!session || !session.MaNguoiDung) { %>
+            <li class="nav-item"><a class="nav-link" href="/dangky">Đăng ký</a></li>
+            <li class="nav-item"><a class="nav-link" href="/dangnhap">Đăng nhập</a></li>
+          <% } else { %>
+            <li class="nav-item"><a class="nav-link" href="/admin">Quản lý</a></li>
+            <li class="nav-item"><a class="nav-link" href="/dangxuat">Đăng xuất</a></li>
+          <% } %>
+        </ul>
+
+        <form class="d-flex" role="search" action="/timkiem" method="post">
+          <input name="tukhoa" class="form-control me-2" type="search" placeholder="Tìm món ăn..." aria-label="Search" />
+          <button class="btn btn-outline-success" type="submit">Tìm</button>
+        </form>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container mt-4">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="row">
+          <% if (thucpham && thucpham.length > 0) { %>
+            <% thucpham.forEach((tp, index) => { %>
+              <div class="col-md-6 mb-4">
+                <article class="card">
+                  <header class="card-header">
+                    <h4 class="card-title"><%= tp.TenMon %></h4> <!-- Hiển thị tên món -->
+                    <div class="card-meta">
+                      Loại: <%= tp.Loai ? tp.Loai.TenLoai : 'Chưa xác định' %>
+                    </div>
+                    <h4 class="card-title"><%= tp.Gia %></h4>
+                  </header>
+                  <a href="/thucpham/chitiet/<%= tp._id %>">
+                    <img class="card-img" src="<%- firstImage(tp.MoTa) %>" alt="" />
+                  </a>
+                  <div class="card-body">
+                    <p class="card-text"><%= tp.TomTat %></p>
+                    <a href="/thucpham/chitiet<%= tp._id %>" class="btn btn-sm btn-primary">Xem chi tiết</a>
+                  </div>
+                </article>
+              </div>
+            <% }) %>
+          <% } else { %>
+            <p>Không có món ăn nào để hiển thị.</p>
+          <% } %>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <aside class="sidebar">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h4 class="card-title">Giới thiệu</h4>
+              <p>Trang web tổng hợp các món ăn vặt được yêu thích nhất. Bạn có thể xem theo loại món hoặc tìm kiếm món ăn yêu thích.</p>
+            </div>
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-body">
+              <h4 class="card-title">Loại</h4>
+              <% if (loai) { loai.forEach(item => { %>
+                <a class="btn btn-light btn-sm mb-1" href="/thucpham/loai/<%= item._id %>"><%= item.TenLoai %></a>
+              <% }) } %>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer bg-dark text-white mt-5 py-4">
+    <div class="container text-center">
+      <p>Bản quyền &copy; 2025 bởi Ăn Vặt Zone. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://quandoanvat.onrender.com/js/app.js"></script>
+</body>
+</html>

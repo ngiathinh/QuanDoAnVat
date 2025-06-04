@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg bg-info navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"><i class="bi bi-basket"></i> Ăn Vặt Zone</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/thucpham"><i class="bi bi-egg-fried"></i> Món ăn vặt</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/loai"><i class="bi bi-tags"></i> Loại món</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="/taikhoan"><i class="bi bi-tags"></i> DS tài khoản</a>
+        </li>
+
+        <% if (!session || !session.MaNguoiDung) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/dangky"><i class="bi bi-person-plus-fill"></i> Đăng ký</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/dangnhap"><i class="bi bi-box-arrow-in-right"></i> Đăng nhập</a>
+          </li>
+        <% } else { %>
+          <% if (session.QuyenHan === 'admin') { %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-gear"></i> Quản lý
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/loai"><i class="bi bi-tags"></i> Quản lý loại món</a></li>
+                <li><a class="dropdown-item" href="/thucpham"><i class="bi bi-egg-fried"></i> Quản lý món ăn</a></li>
+                <li><a class="dropdown-item" href="/taikhoan"><i class="bi bi-people"></i> Quản lý tài khoản</a></li>
+              </ul>
+            </li>
+          <% } %>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person"></i> <%= session.HoVaTen %>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/taikhoan/hoso"><i class="bi bi-person-badge"></i> Hồ sơ cá nhân</a></li>
+              <li><a class="dropdown-item" href="/thucpham/yeuthich"><i class="bi bi-heart"></i> Món yêu thích</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/dangxuat"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a></li>
+            </ul>
+          </li>
+        <% } %>
+      </ul>
+
+      <form action="/timkiem" class="d-flex" role="search" method="get">
+        <input class="form-control me-2" type="search" name="tukhoa" placeholder="Tìm món ăn..." aria-label="Tìm món ăn" />
+        <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
+      </form>
+    </div>
+  </div>
+</nav>

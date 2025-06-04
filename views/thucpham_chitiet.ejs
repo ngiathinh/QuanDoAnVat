@@ -1,0 +1,33 @@
+<%- include('layout/header', { title: thucpham?.TenMon || 'Chi tiết món ăn' }) %>
+<link href="https://quandoanvat.onrender.com/css/app.css" rel="stylesheet" />
+
+<div class="container mt-4">
+  <div class="card shadow p-4">
+    <h2 class="mb-3"><%= thucpham?.TenMon || 'Không có tên món ăn' %></h2>
+
+    <p><strong>Loại món ăn:</strong> <%= thucpham?.Loai?.TenLoai || 'Không xác định' %></p>
+    <p><strong>Giá:</strong> <%= thucpham?.Gia || 'Không xác định' %></p>
+    <p><strong>Mô tả chi tiết:</strong></p>
+    <div><%= thucpham?.MoTa || 'Không có mô tả.' %></div>
+
+    <% 
+      // Lấy ảnh đầu tiên trong mô tả nếu có
+      const img = firstImage(thucpham?.MoTa); 
+
+      // Nếu không có ảnh trong mô tả, lấy ảnh fallback dựa trên mã _id để phân phối ảnh
+      const fallbackIndex = (thucpham?._id?.toString().charCodeAt(0) || 0) % 6 + 1; 
+      const imgSrc = img && img !== 'https://quandoanvat.onrender.com/noimage.png' ? img : `/images/articles/${fallbackIndex}.jpg`;
+    %>
+
+    <img class="card-img" 
+         src="<%= imgSrc %>" 
+         alt="<%= thucpham?.TenMon || 'Ảnh món ăn' %>" />
+
+    <p><strong>Người đăng:</strong> <%= thucpham?.TaiKhoan?.HoTen || 'Ẩn danh' %></p>
+    <p><strong>Lượt xem:</strong> <%= thucpham?.LuotXem ?? 0 %></p>
+
+    <a href="javascript:history.back()" class="btn btn-secondary mt-3">← Quay lại</a>
+  </div>
+</div>
+
+<%- include('footer') %>

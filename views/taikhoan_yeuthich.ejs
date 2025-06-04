@@ -1,0 +1,19 @@
+<h1><%= title %></h1>
+
+<% if (monYeuThich.length === 0) { %>
+  <p>Bạn chưa có món yêu thích nào.</p>
+<% } else { %>
+  <div class="row">
+    <% monYeuThich.forEach(tp => { %>
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><a href="/thucpham/chitiet/<%= tp._id %>"><%= tp.TenMon %></a></h5>
+            <p class="card-text"><%= tp.MoTa.substring(0, 100) %>...</p>
+            <p><small class="text-muted">Loại: <%= tp.Loai ? tp.Loai.TenLoai : 'Không rõ' %></small></p>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+<% } %>

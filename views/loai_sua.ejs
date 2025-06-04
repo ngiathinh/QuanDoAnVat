@@ -1,0 +1,17 @@
+<%- include('layout/header', { title: `Sửa loại: ${loai?.TenLoai || ''}` }) %>
+
+<div class="container mt-4">
+  <h1>Sửa loại</h1>
+
+  <form action="/loai/sua/<%= loai._id %>" method="post">
+    <div class="mb-3">
+      <label for="TenLoaiQuan" class="form-label">Tên loại</label>
+      <input type="text" id="TenLoai" name="TenLoai" class="form-control" value="<%= loai.TenLoai %>" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+    <a href="/loai" class="btn btn-secondary">Hủy</a>
+  </form>
+</div>
+
+<%- include('footer') %>

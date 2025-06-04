@@ -1,0 +1,30 @@
+<%- include('layout/header') %>
+
+<div class="container mt-4">
+  <h2>Thêm thực phẩm</h2>
+  <form method="POST" action="/thucpham/them">
+    <div class="mb-3">
+      <label for="TenMon" class="form-label">Tên thực phẩm</label>
+      <input type="text" class="form-control" id="TenMon" name="TenMon" required>
+    </div>
+    <div class="mb-3">
+      <label for="MoTa" class="form-label">Mô tả</label>
+      <textarea class="form-control" id="MoTa" name="MoTa" rows="4"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="Gia" class="form-label">Giá</label>
+      <input type="number" class="form-control" id="Gia" name="Gia" min="0" step="1000" placeholder="Nhập giá (VNĐ)">
+    </div>
+   <div class="mb-3">
+      <label for="Loai" class="form-label">Loại thực phẩm</label>
+      <select class="form-select" name="MaLoai" required>
+        <% loai.forEach(item => { %>
+          <option value="<%= item._id %>"><%= item.TenLoai %></option>
+        <% }) %>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Thêm</button>
+  </form>
+</div>
+
+<%- include('footer') %>

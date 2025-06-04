@@ -1,0 +1,33 @@
+<div class="text-center">
+	<h3>Kết quả tìm kiếm món ăn</h3>
+	<hr />
+</div>
+
+<% if (thucphamtimkiem && thucphamtimkiem.length > 0) { %>
+	<% thucphamtimkiem.forEach(tp => { %>
+		<article class="card mb-4">
+			<header class="card-header px-0">
+				<div class="card-meta">
+					<time class="timeago" datetime="<%= tp.NgayDang.toISOString() %>"></time>
+					thuộc <a href="/thucpham/loai/<%= tp.Loai._id %>"><%= tp.Loai.TenLoai %></a>
+				</div>
+				<a href="/thucpham/chitiet/<%= tp._id %>">
+					<h4 class="card-title"><%= tp.TenMon %></h4>
+				</a>
+			</header>
+			<div class="card-body px-0 pt-0">
+				<img class="card-img mb-2" src="<%- firstImage(tp.MoTa) %>" alt="">
+				<p class="card-text"><%= tp.MoTa.replace(/(<([^>]+)>)/gi, '').slice(0, 150) %>...</p>
+			</div>
+		</article>
+	<% }); %>
+<% } else { %>
+	<div class="alert alert-primary" role="alert">
+		<h4 class="alert-heading">Rất tiếc!</h4>
+		<p>Không có món ăn nào phù hợp với từ khóa bạn tìm.</p>
+		<hr>
+		<div class="btn-list">
+			<a class="btn btn-primary" type="button" href="/">Về trang chủ</a>
+		</div>
+	</div>
+<% } %>

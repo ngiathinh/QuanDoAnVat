@@ -1,0 +1,31 @@
+<%- include('layout/header', { title: `Loại: ${loai?.TenLoai || 'Không rõ'}` }) %>
+
+<div class="container mt-4">
+  <h2>Thực phẩm thuộc loại: <%= loai?.TenLoai || 'Không rõ' %></h2>
+
+  <div class="row">
+    <% if (thucpham && thucpham.length > 0) { %>
+      <% thucpham.forEach(tp => { 
+           const imgSrc = firstImage(tp.MoTa);
+      %>
+        <div class="col-md-6 mb-4">
+          <article class="card h-100">
+            <a href="/thucpham/<%= tp._id %>">
+              <img src="<%= imgSrc %>" class="card-img-top" alt="<%= tp.TenMon %>" />
+            </a>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title"><%= tp.TenMon %></h5>
+              <p class="card-text flex-grow-1"><%= tp.TomTat %></p>
+              <p><strong>Giá: </strong><%= tp.Gia.toLocaleString('vi-VN') %>₫</p>
+              <a href="/thucpham/<%= tp._id %>" class="btn btn-primary btn-sm mt-auto">Xem chi tiết</a>
+            </div>
+          </article>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p>Không có thực phẩm nào trong loại này.</p>
+    <% } %>
+  </div>
+</div>
+
+<%- include('footer') %>

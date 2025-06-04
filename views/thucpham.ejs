@@ -1,0 +1,44 @@
+<%- include('layout/header', { title: 'Danh sách thực phẩm' }) %>
+
+<div class="container mt-4">
+  <h1>Danh sách thực phẩm</h1>
+  <a href="/thucpham/them" class="btn btn-success mb-3">➕ Thêm thực phẩm</a>
+
+  <table class="table table-bordered table-hover align-middle">
+    <thead class="table-light">
+      <tr>
+        <th style="width: 120px;">Hình ảnh</th>
+        <th>Tên thực phẩm</th>
+        <th>Loại thực phẩm</th>
+        <th style="width: 120px;">Giá</th>
+        <th style="width: 150px;">Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (thucpham && thucpham.length > 0) { %>
+        <% thucpham.forEach(tp => { %>
+          <tr>
+            <td>
+              <img src="<%= firstImage(tp.MoTa) %>" 
+                   alt="<%= tp.TenMon %>" 
+                   style="max-width: 100px; max-height: 100px; object-fit: cover;" />
+            </td>
+            <td><strong><%= tp.TenMon %></strong></td>
+            <td><%= tp.Loai?.TenLoai || 'Chưa có loại' %></td>
+            <td><%= tp.Gia ? tp.Gia.toLocaleString('vi-VN') + ' đ' : 'Chưa có giá' %></td>
+            <td>
+              <a href="/thucpham/sua/<%= tp._id %>" class="btn btn-sm btn-warning">Sửa</a>
+              <a href="/thucpham/xoa/<%= tp._id %>" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc muốn xoá?')">Xoá</a>
+            </td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="6" class="text-center text-muted">Không có thực phẩm nào.</td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('footer') %>

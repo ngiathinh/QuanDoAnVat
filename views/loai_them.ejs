@@ -1,0 +1,17 @@
+<%- include('layout/header', { title: 'Thêm loại' }) %>
+
+<div class="container mt-4">
+  <h1>Thêm loại</h1>
+
+  <form action="/loai/them" method="post">
+    <div class="mb-3">
+      <label for="TenLoai" class="form-label">Tên loại</label>
+      <input type="text" id="TenLoai" name="TenLoai" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-success">Thêm loại</button>
+    <a href="/loai" class="btn btn-secondary">Hủy</a>
+  </form>
+</div>
+
+<%- include('footer') %>

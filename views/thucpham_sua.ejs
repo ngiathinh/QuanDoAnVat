@@ -1,0 +1,30 @@
+<%- include('layout/header', { title: 'Sửa thực phẩm' }) %>
+
+<div class="container mt-4">
+  <h2>Sửa thực phẩm</h2>
+  <form method="POST" action="/thucpham/sua/<%= thucpham._id %>">
+    <div class="mb-3">
+      <label for="TenThucPham" class="form-label">Tên thực phẩm</label>
+      <input type="text" class="form-control" name="TenCuaHang" value="<%= thucpham.TenCuaHang %>" required>
+    </div>
+    <div class="mb-3">
+      <label for="Gia" class="form-label">Giá</label>
+      <input type="number" class="form-control" id="Gia" name="Gia" min="0" step="1000" placeholder="Nhập giá (VNĐ)">
+    </div>
+    <div class="mb-3">
+      <label for="MoTa" class="form-label">Mô tả</label>
+      <textarea class="form-control" name="MoTa"><%= thucpham.MoTa %></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="Loai" class="form-label">Loại thực phẩm</label>
+      <select class="form-select" name="MaLoai">
+        <% loai.forEach(item => { %>
+          <option value="<%= item._id %>" <%= item._id.equals(thucpham.Loai) ? 'selected' : '' %>><%= item.TenLoai %></option>
+        <% }) %>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success">Cập nhật</button>
+  </form>
+</div>
+
+<%- include('footer') %>
