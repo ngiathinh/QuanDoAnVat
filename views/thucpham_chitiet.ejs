@@ -1,5 +1,5 @@
 <%- include('layout/header', { title: thucpham?.TenMon || 'Chi tiết món ăn' }) %>
-<link href="https://quandoanvat.onrender.com/css/app.css" rel="stylesheet" />
+<link href="https://quandoanvat1.onrender.com/css/app.css" rel="stylesheet" />
 
 <div class="container mt-4">
   <div class="card shadow p-4">
@@ -12,11 +12,11 @@
 
     <% 
       // Lấy ảnh đầu tiên trong mô tả nếu có
-      const img = firstImage(thucpham?.MoTa); 
+      var img = firstImage(thucpham?.MoTa); 
 
       // Nếu không có ảnh trong mô tả, lấy ảnh fallback dựa trên mã _id để phân phối ảnh
-      const fallbackIndex = (thucpham?._id?.toString().charCodeAt(0) || 0) % 6 + 1; 
-      const imgSrc = img && img !== 'https://quandoanvat.onrender.com/noimage.png' ? img : `/images/articles/${fallbackIndex}.jpg`;
+      var fallbackIndex = (thucpham?._id?.toString().charCodeAt(0) || 0) % 6 + 1; 
+      var imgSrc = img && img !== 'https://quandoanvat1.onrender.com/noimage.png' ? img : `/images/articles/${fallbackIndex}.jpg`;
     %>
 
     <img class="card-img" 

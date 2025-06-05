@@ -1,5 +1,5 @@
 function firstImage(MoTa) {
-  if (typeof MoTa !== 'string') return 'http://127.0.0.1:3000/images/noimage.png';
+  if (typeof MoTa !== 'string') return 'https://quandoanvat.onrender.com/images/noimage.png';
   var regExp = /<img[^>]+src=["']?([^"'\s>]+)["']?[^>]*\/?>/i;
   var results = regExp.exec(MoTa);
   var image = 'https://quandoanvat.onrender.com/images/noimage.png';
